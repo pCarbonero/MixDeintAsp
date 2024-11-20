@@ -15,7 +15,7 @@ namespace DAL
         /// <summary>
         /// Funcion que se encarga de borrar una persona en la base de datos segun el id pasado por parametro
         /// </summary>
-        /// <pre>Si no encuentra la persona devuelve null</pre>
+        /// <pos>Si no encuentra la persona devuelve null</pos>
         /// <param name="id"></param>
         /// <returns>numero de filas afectadas en la BD</returns>
        public static int deletePersonaDAL(int id)
@@ -84,11 +84,45 @@ namespace DAL
             }
         }
 
-        public static void updatePersonaDAL()
+        /// <summary>
+        /// Actualiza a la persona pasada por parametro
+        /// </summary>
+        /// <param name="nuevaPersona"></param>
+        public static void updatePersonaDAL(clsPersona nuevaPersona)
         {
             SqlConnection conexion = new SqlConnection();  
             clsConexion connectionManager = new clsConexion();
             SqlCommand comando = new SqlCommand();
+
+            try
+            {
+                connectionManager.getConnection(ref conexion);
+
+                comando.Parameters.AddWithValue("@id", nuevaPersona.Id);
+                comando.Parameters.AddWithValue("@nombre", nuevaPersona.Nombre);
+                comando.Parameters.AddWithValue("@apellidos", nuevaPersona.Apellidos);
+                comando.Parameters.AddWithValue("@telefono", nuevaPersona.Telefono);
+                comando.Parameters.AddWithValue("@direccion", nuevaPersona.Direccion);
+                comando.Parameters.AddWithValue("@foto", nuevaPersona.Foto);
+                comando.Parameters.AddWithValue("@fechaNac", nuevaPersona.FechaNacimiento);
+                comando.Parameters.AddWithValue("@idDep", nuevaPersona.IDDepartamento);
+
+                comando.Connection = conexion;
+
+                comando.CommandText = "UPDATE Persona SET nombre = @nombre, apellidos = @apellidos, " +
+                    "telefono = @telefono, direccion = @direccion, foto = @foto, FechaNacimiento = @fechaNac, idDepartamento = @idDep " +
+                    "WHERE ID = @id";
+
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionManager.closeConnection(ref conexion);
+            }
         }
     }
 }

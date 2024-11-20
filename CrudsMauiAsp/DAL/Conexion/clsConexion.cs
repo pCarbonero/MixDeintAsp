@@ -10,10 +10,10 @@ namespace DAL.Conexion
     public class clsConexion
     {
         #region atributos
-        public String server { get; set; }
-        public String dataBase { get; set; }
-        public String user { get; set; }
-        public String pass { get; set; }
+        private String server;
+        private String dataBase;
+        private String user;
+        private String pass;
         #endregion
 
         public clsConexion()
@@ -23,6 +23,16 @@ namespace DAL.Conexion
             this.user = "usuario";
             this.pass = "LaCampana123";
         }
+
+        public clsConexion(string server, string dataBase, string user, string pass)
+        {
+            this.server = server;
+            this.dataBase = dataBase;
+            this.user = user;
+            this.pass = pass;
+        }
+
+
 
         /// <summary>
         /// Funcion que se encarga de realizar la conexion con un objeto SqlConnection referenciado 

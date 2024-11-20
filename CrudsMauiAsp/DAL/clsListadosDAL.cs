@@ -1,4 +1,5 @@
 ﻿using _07_CRUD_Personas_DAL.Conexion;
+using DAL.Conexion;
 using Entidades;
 using Microsoft.Data.SqlClient;
 
@@ -15,7 +16,7 @@ namespace DAL
             List<clsPersona> lista = new List<clsPersona>();
             clsPersona persona;
 
-            clsMyConnection connection = new clsMyConnection();
+            clsConexion connectionManager = new clsConexion();
             SqlConnection connect = new SqlConnection();
 
             SqlCommand miComando = new SqlCommand();
@@ -23,7 +24,7 @@ namespace DAL
 
             try
             {
-                connect = connection.getConnection();
+                connectionManager.getConnection(ref connect);
                 miComando.CommandText = "SELECT *  FROM personas";
                 miComando.Connection = connect;
                 miLector = miComando.ExecuteReader();
@@ -56,7 +57,7 @@ namespace DAL
             }
             finally
             {
-                connection.closeConnection(ref connect);
+                connectionManager.closeConnection(ref connect);
             }
 
             return lista;
@@ -71,18 +72,18 @@ namespace DAL
         {
             clsPersona persona = new clsPersona();
 
-            clsMyConnection connection = new clsMyConnection();
-            SqlConnection connect = new SqlConnection();
+            clsConexion connectionManager = new clsConexion();
+            SqlConnection connection = new SqlConnection();
 
             SqlCommand miComando = new SqlCommand();
             SqlDataReader miLector;
 
             try
             {
-                connect = connection.getConnection();
+                connectionManager.getConnection(ref connection);
                 miComando.Parameters.AddWithValue("@Id", id);
                 miComando.CommandText = "SELECT *  FROM personas WHERE Id = @Id";
-                miComando.Connection = connect;
+                miComando.Connection = connection;
                 miLector = miComando.ExecuteReader();
 
                 if (miLector.HasRows && miLector.Read())
@@ -106,7 +107,7 @@ namespace DAL
             }
             finally
             {
-                connection.closeConnection(ref connect);
+                connectionManager.closeConnection(ref connection);
             }
 
             return persona;
