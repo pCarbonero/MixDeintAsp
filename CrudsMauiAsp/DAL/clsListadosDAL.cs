@@ -10,6 +10,7 @@ namespace DAL
         /// <summary>
         /// Static function that creates an object`s list from clsPersona from the database
         /// </summary>
+        /// <pos> Lista estará llena si hay en la base de datos si no estará null</pos>
         /// <returns></returns>
         public static List<clsPersona> listadoCompletoPersonasDAL()
         {
@@ -45,6 +46,8 @@ namespace DAL
                             persona.FechaNacimiento = (DateTime)miLector["FechaNacimiento"];
                         }
                         persona.Direccion = (string)miLector["Direccion"];
+                        persona.FechaNacimiento = (DateTime)miLector["FechaNacimiento"];
+                        persona.IDDepartamento = (int)miLector["IDDepartamento"];
                         persona.Telefono = (string)miLector["Telefono"];
                         lista.Add(persona);
                     }
@@ -66,6 +69,8 @@ namespace DAL
         /// <summary>
         /// Funcion que busca una persona con un id en la base de datos
         /// </summary>
+        /// <pre>El id debe ser mayor que 0</pre>
+        /// <pos>si encuentra a la persona en la bbdd la devuelve sino devuelve persona vacia</pos>
         /// <param name="id"></param>
         /// <returns>persona con id deseado</returns>
         public static clsPersona getPersonaIdDAL(int id)
