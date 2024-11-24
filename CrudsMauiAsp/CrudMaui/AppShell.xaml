@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:CrudMaui"
     Shell.FlyoutBehavior="Flyout"
     Title="CrudMaui"
-    xmlns:views="clr-namespace:CrudMaui.Views">
+    xmlns:views="clr-namespace:CrudMaui.Views"
+    xmlns:views2="clr-namespace:CrudMaui.Views.Persona">
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <Tab Title="Personas" Icon="dotnet_bot.png">
@@ -21,5 +22,8 @@
                           ContentTemplate="{DataTemplate views:ListadoDepartamentosView}" />
         </Tab>
     </FlyoutItem>
+
+    <ShellContent Route="editar"
+              ContentTemplate="{DataTemplate views2:EditarPersonaView}" />
 </Shell>
 

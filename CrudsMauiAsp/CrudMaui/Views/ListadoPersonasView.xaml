@@ -6,21 +6,44 @@
     <ContentPage.BindingContext>
         <vm:clsListadoPersonasVM/>
     </ContentPage.BindingContext>
-    <AbsoluteLayout>
-        <!-- Contenido principal con ScrollView -->
-        <ScrollView AbsoluteLayout.LayoutFlags="All"
-                    AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <VerticalStackLayout
-                Padding="30,0"
-                Spacing="25">
-                <ListView ItemsSource="{Binding ListadoPersonas}">
+    <Grid BackgroundColor="AliceBlue">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <HorizontalStackLayout
+            Grid.Row="0"
+            Spacing="10"
+            HorizontalOptions="Start"
+            VerticalOptions="Start">
+            <Button Text="Edit" Command="{Binding EditarCommand}"/>
+            <Button Text="+"/>
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="1" Padding="10">
+            <VerticalStackLayout Spacing="10">
+                <ListView ItemsSource="{Binding ListadoPersonas}"
+                          SelectedItem="{Binding PersonaSeleccionada}"
+                          HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <HorizontalStackLayout Padding="10">
-                                    <Image Source="{Binding Foto}" WidthRequest="50"/>
-                                    <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="Medium" />
-                                    <Label Text="{Binding Apellidos}" FontSize="Small" />
+                                <HorizontalStackLayout Spacing="10">
+                                    <Image Source="{Binding Foto}" WidthRequest="100" HeightRequest="100"/>
+                                    <VerticalStackLayout>
+                                        <Label TextColor="Black" FontSize="Large" FontAttributes="Bold">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="Nombre"/>
+                                                    <Binding Path="Apellidos"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                        <Label Text="{Binding IDDepartamento}" FontSize="Small" TextColor="Black"/>
+                                    </VerticalStackLayout>
                                 </HorizontalStackLayout>
                             </ViewCell>
                         </DataTemplate>
@@ -29,32 +52,13 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Botones flotantes -->
         <HorizontalStackLayout
-            AbsoluteLayout.LayoutFlags="PositionProportional"
-            AbsoluteLayout.LayoutBounds="1,1"
+            Grid.Row="2"
             Spacing="10"
-            HorizontalOptions="End"
+            HorizontalOptions="Center"
             VerticalOptions="End">
-            <Button Text="Details"
-                    BackgroundColor="Blue"
-                    TextColor="White"
-                    CornerRadius="25"
-                    WidthRequest="50"
-                    HeightRequest="50"/>
-            <Button Text="+"
-                    BackgroundColor="Green"
-                    TextColor="White"
-                    CornerRadius="25"
-                    WidthRequest="50"
-                    HeightRequest="50"/>
-            <Button Text="-"
-                    BackgroundColor="Red"
-                    TextColor="White"
-                    CornerRadius="25"
-                    WidthRequest="50"
-                    HeightRequest="50"/>
+            <Button Text="-"/>
         </HorizontalStackLayout>
-    </AbsoluteLayout>
+    </Grid>
 
 </ContentPage>

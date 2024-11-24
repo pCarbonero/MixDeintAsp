@@ -68,10 +68,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Persona\EditarPersonaView.xaml.cs">
+	    <DependentUpon>EditarPersonaView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\ListadoDepartamentosView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ListadoPersonasView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Persona\EditarPersonaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
