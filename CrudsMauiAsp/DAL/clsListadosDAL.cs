@@ -26,7 +26,7 @@ namespace DAL
             try
             {
                 connectionManager.getConnection(ref connect);
-                miComando.CommandText = "SELECT *  FROM personas";
+                miComando.CommandText = "SELECT * FROM personas";
                 miComando.Connection = connect;
                 miLector = miComando.ExecuteReader();
 

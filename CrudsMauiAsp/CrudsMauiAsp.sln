@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudMaui", "CrudMaui\CrudMaui.csproj", "{B7B33B1F-8620-4804-A725-A968D0B61444}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{82709AE5-D6B6-4F69-86F1-B085A4B2C215}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{74FF9412-0CCD-4A81-BD9D-6D67BEED1155}"
@@ -13,18 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{0E03
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudAsp", "CrudAsp\CrudAsp.csproj", "{15999F5B-99E5-402F-B4A9-8AA661887408}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba", "Prueba\Prueba.csproj", "{02449964-9BD3-4FB2-9FFD-9CCD898F8DE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudMaui", "CrudMaui\CrudMaui.csproj", "{C41ECC0D-18DC-4273-8E6F-E35EF7EED73A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B7B33B1F-8620-4804-A725-A968D0B61444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7B33B1F-8620-4804-A725-A968D0B61444}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7B33B1F-8620-4804-A725-A968D0B61444}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{B7B33B1F-8620-4804-A725-A968D0B61444}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7B33B1F-8620-4804-A725-A968D0B61444}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7B33B1F-8620-4804-A725-A968D0B61444}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{82709AE5-D6B6-4F69-86F1-B085A4B2C215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82709AE5-D6B6-4F69-86F1-B085A4B2C215}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82709AE5-D6B6-4F69-86F1-B085A4B2C215}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,6 +37,18 @@ Global
 		{15999F5B-99E5-402F-B4A9-8AA661887408}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15999F5B-99E5-402F-B4A9-8AA661887408}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15999F5B-99E5-402F-B4A9-8AA661887408}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02449964-9BD3-4FB2-9FFD-9CCD898F8DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02449964-9BD3-4FB2-9FFD-9CCD898F8DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02449964-9BD3-4FB2-9FFD-9CCD898F8DE0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{02449964-9BD3-4FB2-9FFD-9CCD898F8DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02449964-9BD3-4FB2-9FFD-9CCD898F8DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02449964-9BD3-4FB2-9FFD-9CCD898F8DE0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C41ECC0D-18DC-4273-8E6F-E35EF7EED73A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41ECC0D-18DC-4273-8E6F-E35EF7EED73A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41ECC0D-18DC-4273-8E6F-E35EF7EED73A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C41ECC0D-18DC-4273-8E6F-E35EF7EED73A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41ECC0D-18DC-4273-8E6F-E35EF7EED73A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41ECC0D-18DC-4273-8E6F-E35EF7EED73A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
