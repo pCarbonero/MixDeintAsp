@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using CrudMaui.Models;
 
 namespace CrudMaui.ViewModels
 {
@@ -16,12 +17,13 @@ namespace CrudMaui.ViewModels
     {
         #region atributos
         private clsPersona personaSeleccionada;
-
+        private ObservableCollection<clsPersonaNombreDepartamento> listadoPersonasConNombreDept;
+        private List<clsPersona> listadoPersonas;
         private DelegateCommand editarCommand;
         #endregion
 
         #region propiedades
-        public ObservableCollection<clsPersona> ListadoPersonas { get; }
+        public ObservableCollection<clsPersonaNombreDepartamento> ListadoPersonasConNombreDept { get { return listadoPersonasConNombreDept; } }
         public clsPersona PersonaSeleccionada 
         {
             get { return personaSeleccionada; }
@@ -36,7 +38,19 @@ namespace CrudMaui.ViewModels
         #region constructores
         public clsListadoPersonasVM() 
         { 
-            ListadoPersonas = new ObservableCollection<clsPersona>(clsListadosBL.listadoCompletoPersonasBL());
+            // se llena la lista (List) con la lista completa de la BL
+            listadoPersonas = clsListadosBL.listadoCompletoPersonasBL();
+            listadoPersonasConNombreDept = new ObservableCollection<clsPersonaNombreDepartamento>();
+
+            // se crea una lista de departamentos
+            List<clsDepartamento> listaDept = clsListadosBL.listadoCompletoDepartamentosBL();
+
+            foreach(clsPersona persona in listadoPersonas)
+            {
+                clsPersonaNombreDepartamento personaNombreDept = new clsPersonaNombreDepartamento(persona, listaDept);
+                listadoPersonasConNombreDept.Add(personaNombreDept);
+            }
+
             editarCommand = new DelegateCommand(editarCommandExecuted, editarCommandCanExecute);
         }
         #endregion

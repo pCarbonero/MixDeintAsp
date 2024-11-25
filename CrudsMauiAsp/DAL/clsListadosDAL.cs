@@ -104,6 +104,7 @@ namespace DAL
                     }
                     persona.Direccion = (string)miLector["Direccion"];
                     persona.Telefono = (string)miLector["Telefono"];
+                    persona.IDDepartamento = (int)miLector["IdDepartamento"];
                 }
             }
             catch (Exception e)
@@ -116,6 +117,56 @@ namespace DAL
             }
 
             return persona;
+        }
+
+
+        /// <summary>
+        /// Funcion estatica que devuelve una lista completa ede deaprtamentos
+        /// </summary>
+        /// <pos> Lista estará llena si hay en la base de datos si no estará null</pos>
+        /// <returns></returns>
+        public static List<clsDepartamento> listadoCompletoDepartamentosDAL()
+        {
+            List<clsDepartamento> lista = new List<clsDepartamento>();
+            clsDepartamento departamento;
+
+            clsConexion connectionManager = new clsConexion();
+            SqlConnection connect = new SqlConnection();
+
+            SqlCommand miComando = new SqlCommand();
+            SqlDataReader miLector;
+
+            try
+            {
+                connectionManager.getConnection(ref connect);
+                miComando.CommandText = "SELECT * FROM Departamentos";
+                miComando.Connection = connect;
+                miLector = miComando.ExecuteReader();
+
+
+                if (miLector.HasRows)
+                {
+                    while (miLector.Read())
+                    {
+                        departamento = new clsDepartamento();
+                        departamento.Id = (int)miLector["ID"];
+                        departamento.Nombre = (string)miLector["Nombre"];
+  
+                        lista.Add(departamento);
+                    }
+                }
+                miLector.Close();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionManager.closeConnection(ref connect);
+            }
+
+            return lista;
         }
     }
 }

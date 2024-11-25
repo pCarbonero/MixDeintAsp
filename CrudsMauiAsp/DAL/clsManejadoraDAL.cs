@@ -50,8 +50,9 @@ namespace DAL
         /// </summary>
         /// <param name="nuevaPersona"></param>
         /// <returns>si ha sido añadida o no</returns>
-        public static void insertPersonaDAL(clsPersona nuevaPersona)
+        public static bool insertPersonaDAL(clsPersona nuevaPersona)
         {
+            bool insertada = false;
             SqlConnection conexion = new SqlConnection();
             clsConexion connectionManager = new clsConexion();
             SqlCommand comando = new SqlCommand();
@@ -73,6 +74,8 @@ namespace DAL
                 comando.CommandText = "INSERT INTO Personas VALUES (@nombre, @apellidos, @telefono, @direccion, @foto, @fechaNac, @idDep)";
 
                 comando.ExecuteNonQuery();
+
+                insertada = true;
             }
             catch (SqlException ex) 
             { 
@@ -82,14 +85,17 @@ namespace DAL
             {
                 connectionManager.closeConnection(ref conexion);
             }
+
+            return insertada;
         }
 
         /// <summary>
         /// Actualiza a la persona pasada por parametro
         /// </summary>
         /// <param name="nuevaPersona"></param>
-        public static void updatePersonaDAL(clsPersona nuevaPersona)
+        public static bool updatePersonaDAL(clsPersona nuevaPersona)
         {
+            bool updated = false;
             SqlConnection conexion = new SqlConnection();  
             clsConexion connectionManager = new clsConexion();
             SqlCommand comando = new SqlCommand();
@@ -109,11 +115,13 @@ namespace DAL
 
                 comando.Connection = conexion;
 
-                comando.CommandText = "UPDATE Persona SET nombre = @nombre, apellidos = @apellidos, " +
+                comando.CommandText = "UPDATE Personas SET nombre = @nombre, apellidos = @apellidos, " +
                     "telefono = @telefono, direccion = @direccion, foto = @foto, FechaNacimiento = @fechaNac, idDepartamento = @idDep " +
                     "WHERE ID = @id";
 
                 comando.ExecuteNonQuery();
+
+                updated = true;
             }
             catch (SqlException ex)
             {
@@ -123,6 +131,7 @@ namespace DAL
             {
                 connectionManager.closeConnection(ref conexion);
             }
+            return updated;
         }
     }
 }

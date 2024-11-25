@@ -17,8 +17,8 @@ namespace CrudAsp.Controllers
                 listado = clsListadosBL.listadoCompletoPersonasBL();
             }
             catch (Exception ex) 
-            { 
-
+            {
+                return View("Error");
             }
             return View(listado);
         }
@@ -48,57 +48,79 @@ namespace CrudAsp.Controllers
         // POST: PersonaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(clsPersona personaInsertar)
         {
             try
             {
+                clsManejadoraBL.insertPersonaBL(personaInsertar);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View("Error");
             }
         }
 
         // GET: PersonaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            clsPersona personaEditar = new clsPersona();
+            try
+            {
+                personaEditar = clsListadosBL.getPersonaIdBL(id);
+            }
+            catch (Exception e)
+            {
+                return View("Error");
+            }
+            return View(personaEditar);
         }
 
         // POST: PersonaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(clsPersona persona)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                clsManejadoraBL.updatePersonaBL(persona);
             }
             catch
             {
-                return View();
+                return View("Error");
             }
+            return View(persona);
         }
 
         // GET: PersonaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            clsPersona personaBorrar = new clsPersona();
+            try
+            {
+                personaBorrar = clsListadosBL.getPersonaIdBL(id);
+            }
+            catch(Exception e)
+            {
+                return View("Error");
+            }
+            return View(personaBorrar);
         }
 
         // POST: PersonaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [ActionName("Delete")]
+        public ActionResult DeletePost(int id)
         {
             try
             {
+                int filasAfectadas = clsManejadoraBL.deletePersonaBL(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e) 
             {
-                return View();
+                return View("Error");
             }
         }
     }

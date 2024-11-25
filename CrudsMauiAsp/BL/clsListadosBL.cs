@@ -25,5 +25,15 @@ namespace BL
             clsPersona persona = clsListadosDAL.getPersonaIdDAL(id);
             return persona;
         }
+
+        /// <summary>
+        /// Funcion que devuelve una lista que le envian de la capa DAL
+        /// </summary>
+        /// <returns></returns>
+        public static List<clsDepartamento> listadoCompletoDepartamentosBL()
+        {
+            List<clsDepartamento> lista = clsListadosDAL.listadoCompletoDepartamentosDAL();
+            return lista;
+        }
     }
 }

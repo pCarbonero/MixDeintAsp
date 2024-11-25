@@ -7,16 +7,18 @@
         <vm:clsEditarPersonaVM/>
     </ContentPage.BindingContext>
     
-    <VerticalStackLayout>
+    <VerticalStackLayout BackgroundColor="White">
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
 
-        <Entry Text="{Binding PersonaEditada.Nombre}"/>
-        <Entry Text="{Binding PersonaEditada.Apellidos}"/>
-        <Entry Text="{Binding PersonaEditada.FechaNacimiento}"/>
-        <Entry Text="{Binding PersonaEditada.Direccion}"/>
+        <Entry Text="{Binding PersonaEditada.Nombre}" TextColor="Black"/>
+        <Entry Text="{Binding PersonaEditada.Apellidos}" TextColor="Black"/>
+        <Entry Text="{Binding PersonaEditada.FechaNacimiento}" TextColor="Black"/>
+        <Entry Text="{Binding PersonaEditada.Direccion}" TextColor="Black"/>
+        <Picker ItemsSource="{Binding ListaDepartamentos}"
+            SelectedItem="{Binding DepartamentoSeleccionado}"  TextColor="Black"></Picker>
     </VerticalStackLayout>
 </ContentPage>
