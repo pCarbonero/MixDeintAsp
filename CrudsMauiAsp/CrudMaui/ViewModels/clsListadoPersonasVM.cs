@@ -45,7 +45,12 @@ namespace CrudMaui.ViewModels
         event EventHandler CanExecuteChanged;
         public async void editarCommandExecuted()
         {
-            await Shell.Current.GoToAsync($"///editar?id={personaSeleccionada.Id}");
+            //await Shell.Current.GoToAsync($"///editar?id={personaSeleccionada.Id}");
+            Dictionary<string, object> diccionarioMandar = new Dictionary<string, object>();
+
+            diccionarioMandar.Add("Persona", PersonaSeleccionada);
+
+            await Shell.Current.GoToAsync("///editar", diccionarioMandar);
         }
 
         public bool editarCommandCanExecute()

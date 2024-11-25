@@ -15,5 +15,8 @@
 
 
         <Entry Text="{Binding PersonaEditada.Nombre}"/>
+        <Entry Text="{Binding PersonaEditada.Apellidos}"/>
+        <Entry Text="{Binding PersonaEditada.FechaNacimiento}"/>
+        <Entry Text="{Binding PersonaEditada.Direccion}"/>
     </VerticalStackLayout>
 </ContentPage>

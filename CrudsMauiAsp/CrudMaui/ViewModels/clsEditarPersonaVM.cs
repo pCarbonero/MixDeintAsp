@@ -2,20 +2,46 @@
 using Entidades;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CrudMaui.ViewModels
 {
-    public class clsEditarPersonaVM
+    [QueryProperty(nameof(PersonaEditada), "Persona")]
+    public class clsEditarPersonaVM: INotifyPropertyChanged
     {
-        public clsPersona PersonaEditada { get; set; }
+        private int idPersona;
+        private clsPersona personaEditada;
 
-        public clsEditarPersonaVM() { }
-        public clsEditarPersonaVM(int id) 
+        public clsPersona PersonaEditada 
         { 
-            PersonaEditada = clsListadosBL.getPersonaIdBL(id);
-        } 
+            get { return personaEditada; } 
+            set 
+            { 
+                personaEditada = value; 
+                NotifyPropertyChanged("PersonaEditada");
+            } 
+        }
+
+
+        public clsEditarPersonaVM() 
+        { 
+            
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+
+        {
+
+            PropertyChanged?.Invoke(this, new
+            PropertyChangedEventArgs(propertyName));
+
+        }
     }
 }
