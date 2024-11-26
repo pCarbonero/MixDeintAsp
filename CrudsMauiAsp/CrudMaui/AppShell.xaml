@@ -26,5 +26,8 @@
 
     <ShellContent Route="editar"
               ContentTemplate="{DataTemplate views2:EditarPersonaView}" />
+
+    <ShellContent Route="insertar"
+          ContentTemplate="{DataTemplate views2:AddPersonaView}" />
 </Shell>
 

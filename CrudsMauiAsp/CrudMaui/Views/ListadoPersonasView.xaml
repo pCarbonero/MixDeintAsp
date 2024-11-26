@@ -21,7 +21,8 @@
             HorizontalOptions="Start"
             VerticalOptions="Start">
             <Button Text="Edit" Command="{Binding EditarCommand}"/>
-            <Button Text="+"/>
+            <Button Text="+" Command="{Binding AddCommand}"/>
+            <Button Text="O" Clicked="ContentPage_Appearing"/>
         </HorizontalStackLayout>
 
         <ScrollView Grid.Row="1" Padding="10">
@@ -58,7 +59,7 @@
             Spacing="10"
             HorizontalOptions="Center"
             VerticalOptions="End">
-            <Button Text="-"/>
+            <Button Text="-" Command="{Binding DeleteCommand}"/>
         </HorizontalStackLayout>
     </Grid>
 

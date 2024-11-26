@@ -19,7 +19,10 @@ namespace CrudMaui.ViewModels
         private clsPersonaNombreDepartamento personaSeleccionada;
         private ObservableCollection<clsPersonaNombreDepartamento> listadoPersonasConNombreDept;
         private List<clsPersona> listadoPersonas;
+
         private DelegateCommand editarCommand;
+        private DelegateCommand deleteCommand;
+        private DelegateCommand addCommand;
         #endregion
 
         #region propiedades
@@ -27,11 +30,26 @@ namespace CrudMaui.ViewModels
         public clsPersonaNombreDepartamento PersonaSeleccionada 
         {
             get { return personaSeleccionada; }
-            set { personaSeleccionada = value; NotifyPropertyChanged("PersonaSeleccionada"); editarCommand.RaiseCanExecuteChanged(); }
+            set 
+            { 
+                personaSeleccionada = value; NotifyPropertyChanged("PersonaSeleccionada"); 
+                editarCommand.RaiseCanExecuteChanged();
+                deleteCommand.RaiseCanExecuteChanged();
+            }
         }
+
+        // propiedades de los comandos
         public DelegateCommand EditarCommand
         {
             get { return editarCommand; }
+        }
+        public DelegateCommand DeleteCommand
+        {
+            get { return deleteCommand; }
+        }
+        public DelegateCommand AddCommand
+        {
+            get { return addCommand; }
         }
         #endregion
 
@@ -39,7 +57,10 @@ namespace CrudMaui.ViewModels
         public clsListadoPersonasVM() 
         {
             recargarLista();
-            editarCommand = new DelegateCommand(editarCommandExecuted, editarCommandCanExecute);
+
+            editarCommand = new DelegateCommand(editarCommandExecuted, personaSelectedCommandCanExecute);
+            deleteCommand = new DelegateCommand(deleteCommandExecute, personaSelectedCommandCanExecute);
+            addCommand = new DelegateCommand(addCommandExecute);
         }
         #endregion
 
@@ -50,20 +71,66 @@ namespace CrudMaui.ViewModels
         /// </summary>
         public async void editarCommandExecuted()
         {
-            //await Shell.Current.GoToAsync($"///editar?id={personaSeleccionada.Id}");
-            Dictionary<string, object> diccionarioMandar = new Dictionary<string, object>();
-            clsPersona personaMandar = clsListadosBL.getPersonaIdBL(personaSeleccionada.Id);
+            try
+            {
+                Dictionary<string, object> diccionarioMandar = new Dictionary<string, object>();
+                clsPersona personaMandar = clsListadosBL.getPersonaIdBL(personaSeleccionada.Id);
 
-            diccionarioMandar.Add("Persona", personaMandar);
+                diccionarioMandar.Add("Persona", personaMandar);
 
-            await Shell.Current.GoToAsync("///editar", diccionarioMandar);
+                await Shell.Current.GoToAsync("///editar", diccionarioMandar);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Ha ocurrido un error. Intentalo de nuevo más tarde", "OK");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public async void deleteCommandExecute()
+        {
+            try
+            {
+                int lineasAfectadas = clsManejadoraBL.deletePersonaBL(personaSeleccionada.Id);
+
+                if (lineasAfectadas > 0)
+                {
+                    ListadoPersonasConNombreDept.Remove(PersonaSeleccionada);
+                    await Application.Current.MainPage.DisplayAlert("Borrado", "Se ha borrado correctamente", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "La persona no existe.", "OK");
+                }
+            }
+            catch (Exception e)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Ha ocurrido un error. Intentalo de nuevo más tarde", "OK");
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public async void addCommandExecute()
+        {
+            try
+            {
+                await Shell.Current.GoToAsync("///insertar");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Ha ocurrido un error. Intentalo de nuevo más tarde", "OK");
+            }
         }
 
         /// <summary>
         /// metodo para comprobar si el boton de editar puede pulsarse o no 
         /// </summary>
         /// <returns></returns>
-        public bool editarCommandCanExecute()
+        public bool personaSelectedCommandCanExecute()
         {
             bool canExecute = false;
 
