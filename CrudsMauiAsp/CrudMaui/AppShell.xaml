@@ -13,7 +13,8 @@
         <Tab Title="Personas" Icon="dotnet_bot.png">
             <ShellContent Title="Personas"
                           Icon="dotnet_bot.png"
-                          ContentTemplate="{DataTemplate views:ListadoPersonasView}" />
+                          ContentTemplate="{DataTemplate views:ListadoPersonasView}" 
+                          Route="ListaPersonas"/>
         </Tab>
 
         <Tab Title="Departamentos" Icon="dotnet_bot.png">

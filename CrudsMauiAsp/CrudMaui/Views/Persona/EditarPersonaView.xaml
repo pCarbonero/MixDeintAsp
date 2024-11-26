@@ -14,11 +14,14 @@
             HorizontalOptions="Center" />
 
 
-        <Entry Text="{Binding PersonaEditada.Nombre}" TextColor="Black"/>
-        <Entry Text="{Binding PersonaEditada.Apellidos}" TextColor="Black"/>
-        <Entry Text="{Binding PersonaEditada.FechaNacimiento}" TextColor="Black"/>
-        <Entry Text="{Binding PersonaEditada.Direccion}" TextColor="Black"/>
+        <Entry Text="{Binding Persona.Nombre}" TextColor="Black"/>
+        <Entry Text="{Binding Persona.Apellidos}" TextColor="Black"/>
+        <Entry Text="{Binding Persona.FechaNacimiento}" TextColor="Black"/>
+        <Entry Text="{Binding Persona.Direccion}" TextColor="Black"/>
         <Picker ItemsSource="{Binding ListaDepartamentos}"
-            SelectedItem="{Binding DepartamentoSeleccionado}"  TextColor="Black"></Picker>
+                SelectedItem="{Binding DepartamentoSeleccionado}"
+                ItemDisplayBinding="{Binding Nombre}"/>
+        <Button Text="Guardar"
+                Command="{Binding ActualizarPersona}"/>
     </VerticalStackLayout>
 </ContentPage>

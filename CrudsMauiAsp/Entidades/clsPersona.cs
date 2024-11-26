@@ -1,4 +1,6 @@
-﻿namespace Entidades
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Entidades
 {
     public class clsPersona
     {
@@ -15,6 +17,18 @@
 
         #region constructores
         public clsPersona() { }
+
+        public clsPersona(clsPersona p)
+        {
+            Id = p.Id;
+            Nombre = p.Nombre;
+            Apellidos = p.Apellidos;
+            Telefono = p.Telefono;
+            Direccion = p.Direccion;
+            Foto = p.Foto;
+            FechaNacimiento = p.FechaNacimiento;
+            IDDepartamento = p.IDDepartamento;
+        }
 
         public clsPersona(int id, string nombre, string apellidos, string telefono, string direccion, string foto, DateTime fechaNacimiento, int idDepartamento)
         {

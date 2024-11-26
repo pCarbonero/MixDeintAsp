@@ -35,5 +35,15 @@ namespace BL
             List<clsDepartamento> lista = clsListadosDAL.listadoCompletoDepartamentosDAL();
             return lista;
         }
+
+        /// <summary>
+        /// Funcion que devuelve una lista que le envian de la capa DAL
+        /// </summary>
+        /// <returns></returns>
+        public static clsDepartamento getDepartamentoIdBL(int id)
+        {
+            clsDepartamento dept = clsListadosDAL.getDepartamentoIdDAL(id);
+            return dept;
+        }
     }
 }

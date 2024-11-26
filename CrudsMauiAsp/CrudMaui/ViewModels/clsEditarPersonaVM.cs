@@ -1,5 +1,6 @@
 ﻿using BL;
 using CrudMaui.Models;
+using CrudMaui.ViewModels.Utilidades;
 using Entidades;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,29 @@ using System.Threading.Tasks;
 
 namespace CrudMaui.ViewModels
 {
-    [QueryProperty(nameof(PersonaEditada), "Persona")]
+    [QueryProperty(nameof(Persona), "Persona")]
     public class clsEditarPersonaVM: INotifyPropertyChanged
     {
         #region Atributos
-        private clsPersona personaEditada;
+        private clsPersona persona;
         private List<clsDepartamento> listaDepartamentos;
-        public clsDepartamento departamentoSeleccionado;
+        private clsDepartamento departamentoSeleccionado;
+        private DelegateCommand actualizarPersona;
         #endregion
 
         #region Propiedades
-        public clsPersona PersonaEditada 
+        public clsPersona Persona 
         { 
-            get { return personaEditada; } 
+            get 
+            { 
+                return persona; 
+            } 
             set 
             { 
-                personaEditada = value; 
-                NotifyPropertyChanged("PersonaEditada");
+                persona = value; 
+                NotifyPropertyChanged("Persona");
+                departamentoSeleccionado = clsListadosBL.getDepartamentoIdBL(persona.IDDepartamento);
+                NotifyPropertyChanged("DepartamentoSeleccionado");
             } 
         }
 
@@ -44,7 +51,13 @@ namespace CrudMaui.ViewModels
             {
                 departamentoSeleccionado = value;
                 NotifyPropertyChanged("DepartamentoSeleccionado");
+                actualizarPersona.RaiseCanExecuteChanged();
             }
+        }
+
+        public DelegateCommand ActualizarPersona
+        {
+            get { return actualizarPersona; }
         }
         #endregion
 
@@ -52,6 +65,30 @@ namespace CrudMaui.ViewModels
         public clsEditarPersonaVM() 
         {
             listaDepartamentos = clsListadosBL.listadoCompletoDepartamentosBL();
+            actualizarPersona = new DelegateCommand(actualizarCommandExecute/*, actualizarCommandCanExecute*/);
+        }
+        #endregion
+
+        #region Comandos
+        public async void actualizarCommandExecute()
+        {
+            persona.IDDepartamento = departamentoSeleccionado.Id;
+            try
+            {
+                clsManejadoraBL.updatePersonaBL(persona);
+                await Shell.Current.GoToAsync("///ListaPersonas");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("ASJIOFH", "SAHDOSIH", "OJ");
+            }
+        }
+
+        public bool actualizarCommandCanExecute()
+        {
+             bool canExecute = false;
+             if (departamentoSeleccionado == null) { canExecute = true; }
+             return canExecute;
         }
         #endregion
 

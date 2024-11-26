@@ -168,5 +168,50 @@ namespace DAL
 
             return lista;
         }
+
+        /// <summary>
+        /// Funcion que busca un departamennto con un id en la base de datos
+        /// </summary>
+        /// <pre>El id debe ser mayor que 0</pre>
+        /// <pos>si encuentra a la persona en la bbdd la devuelve sino devuelve persona vacia</pos>
+        /// <param name="id"></param>
+        /// <returns>persona con id deseado</returns>
+        public static clsDepartamento getDepartamentoIdDAL(int id)
+        {
+            clsDepartamento departamento = new clsDepartamento();
+
+            clsConexion connectionManager = new clsConexion();
+            SqlConnection connection = new SqlConnection();
+
+            SqlCommand miComando = new SqlCommand();
+            SqlDataReader miLector;
+
+            try
+            {
+                connectionManager.getConnection(ref connection);
+                miComando.Parameters.AddWithValue("@Id", id);
+                miComando.CommandText = "SELECT *  FROM Departamentos WHERE Id = @Id";
+                miComando.Connection = connection;
+                miLector = miComando.ExecuteReader();
+
+                if (miLector.HasRows && miLector.Read())
+                {
+                    departamento = new clsDepartamento();
+                    departamento.Id = (int)miLector["ID"];
+                    departamento.Nombre = (string)miLector["Nombre"];
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionManager.closeConnection(ref connection);
+            }
+
+            return departamento;
+        }
+
     }
 }
