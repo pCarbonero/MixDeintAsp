@@ -20,6 +20,7 @@ namespace CrudMaui.Models
             Apellidos = persona.Apellidos;
             Direccion = persona.Direccion;
             Foto = persona.Foto;
+            Telefono = persona.Telefono;
             FechaNacimiento = persona.FechaNacimiento;
             IDDepartamento = persona.IDDepartamento;
 

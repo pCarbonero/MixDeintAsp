@@ -1,6 +1,7 @@
 ﻿using BL;
 using CrudMaui.ViewModels.Utilidades;
 using Entidades;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace CrudMaui.ViewModels
 {
     public class clsAddPersonaVM: INotifyPropertyChanged
     {
-        #region
+        #region atributos
         private clsPersona persona;
         private List<clsDepartamento> listaDepartamentos;
         private clsDepartamento departamentoSeleccionado;
@@ -24,7 +25,12 @@ namespace CrudMaui.ViewModels
         public clsPersona Persona
         {
             get { return persona; }
-            set { persona = value; NotifyPropertyChanged("Persona"); }
+            set 
+            { 
+                persona = value; 
+                NotifyPropertyChanged("Persona");
+                addCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public List<clsDepartamento> ListaDepartamentos
@@ -36,7 +42,12 @@ namespace CrudMaui.ViewModels
         public clsDepartamento DepartamentoSeleccionado
         {
             get { return departamentoSeleccionado; }
-            set { departamentoSeleccionado = value; NotifyPropertyChanged("DepartamentoSeleccionado"); }
+            set 
+            { 
+                departamentoSeleccionado = value; 
+                NotifyPropertyChanged("DepartamentoSeleccionado");
+                addCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public DelegateCommand AddCommand
@@ -52,13 +63,11 @@ namespace CrudMaui.ViewModels
             persona = new clsPersona();
             departamentoSeleccionado = new clsDepartamento();
             listaDepartamentos = clsListadosBL.listadoCompletoDepartamentosBL();
-            addCommand = new DelegateCommand(addCommandExecute);
+            addCommand = new DelegateCommand(addCommandExecute, addCommandCanExecute);
         }
-
         #endregion
 
         #region command
-
         public async void addCommandExecute()
         {
             try
@@ -78,8 +87,16 @@ namespace CrudMaui.ViewModels
             }
             catch (Exception ex)
             {
-                //asdiofdj
+                await Application.Current.MainPage.DisplayAlert("Error", "Intentalo más tarde.", "OK");
             }
+        }
+
+        private bool addCommandCanExecute()
+        {
+            bool canExecute = true;
+
+
+            return canExecute;
         }
 
         #endregion

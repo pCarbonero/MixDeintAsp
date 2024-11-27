@@ -14,7 +14,7 @@
             HorizontalOptions="Center" />
 
         <Label Text="Nombre"/>
-        <Entry Text="{Binding Persona.Nombre}"/>
+        <Entry Text="{Binding Persona.Nombre}"/> <!--¿Qué?-->
         <Label Text="Apellidos"/>
         <Entry Text="{Binding Persona.Apellidos}"/>
         <Label Text="Direccion"/>

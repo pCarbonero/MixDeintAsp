@@ -18,6 +18,7 @@
         <Entry Text="{Binding Persona.Apellidos}" TextColor="Black"/>
         <Entry Text="{Binding Persona.FechaNacimiento}" TextColor="Black"/>
         <Entry Text="{Binding Persona.Direccion}" TextColor="Black"/>
+        <Entry Text="{Binding Persona.Foto}" TextColor="Black"/>
         <Picker ItemsSource="{Binding ListaDepartamentos}"
                 SelectedItem="{Binding DepartamentoSeleccionado}"
                 ItemDisplayBinding="{Binding Nombre}"/>

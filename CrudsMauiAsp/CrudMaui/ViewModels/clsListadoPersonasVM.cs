@@ -23,6 +23,7 @@ namespace CrudMaui.ViewModels
         private DelegateCommand editarCommand;
         private DelegateCommand deleteCommand;
         private DelegateCommand addCommand;
+        private DelegateCommand detailsCommand;
         #endregion
 
         #region propiedades
@@ -35,6 +36,7 @@ namespace CrudMaui.ViewModels
                 personaSeleccionada = value; NotifyPropertyChanged("PersonaSeleccionada"); 
                 editarCommand.RaiseCanExecuteChanged();
                 deleteCommand.RaiseCanExecuteChanged();
+                detailsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -51,6 +53,11 @@ namespace CrudMaui.ViewModels
         {
             get { return addCommand; }
         }
+
+        public DelegateCommand DetailsCommand
+        {
+            get { return detailsCommand; }
+        }
         #endregion
 
         #region constructores
@@ -61,6 +68,7 @@ namespace CrudMaui.ViewModels
             editarCommand = new DelegateCommand(editarCommandExecuted, personaSelectedCommandCanExecute);
             deleteCommand = new DelegateCommand(deleteCommandExecute, personaSelectedCommandCanExecute);
             addCommand = new DelegateCommand(addCommandExecute);
+            detailsCommand = new DelegateCommand(detailsCommandExecute, personaSelectedCommandCanExecute);
         }
         #endregion
 
@@ -87,7 +95,7 @@ namespace CrudMaui.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Funcion que manda una persona al vm editar persona y cambia a la vista de editar
         /// </summary>
         public async void deleteCommandExecute()
         {
@@ -112,13 +120,32 @@ namespace CrudMaui.ViewModels
         }
         
         /// <summary>
-        /// 
+        /// Funcion que dirige al usuario a la pantalla de añadir persona
         /// </summary>
         public async void addCommandExecute()
         {
             try
             {
                 await Shell.Current.GoToAsync("///insertar");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Ha ocurrido un error. Intentalo de nuevo más tarde", "OK");
+            }
+        }
+
+        /// <summary>
+        /// Funcion que dirige al usuario a la vista de detalles persona
+        /// </summary>
+        public async void detailsCommandExecute()
+        {
+            try
+            {
+                Dictionary<string, object> diccionarioMandar = new Dictionary<string, object>();
+
+                diccionarioMandar.Add("Persona", personaSeleccionada);
+
+                await Shell.Current.GoToAsync("///detalles", diccionarioMandar);
             }
             catch (Exception ex)
             {
@@ -144,6 +171,9 @@ namespace CrudMaui.ViewModels
         #endregion
 
         #region metodos
+        /// <summary>
+        /// Funcion que se encarga de recargar la lista por si ha habido cambios en la base de datos
+        /// </summary>
         public void recargarLista()
         {
             // se llena la lista (List) con la lista completa de la BL

@@ -25,9 +25,12 @@
     </FlyoutItem>
 
     <ShellContent Route="editar"
-              ContentTemplate="{DataTemplate views2:EditarPersonaView}" />
+              ContentTemplate="{DataTemplate views2:EditarPersonaView}" FlyoutItemIsVisible="False"/>
 
     <ShellContent Route="insertar"
-          ContentTemplate="{DataTemplate views2:AddPersonaView}" />
+          ContentTemplate="{DataTemplate views2:AddPersonaView}" FlyoutItemIsVisible="False"/>
+    
+    <ShellContent Route="detalles"
+      ContentTemplate="{DataTemplate views2:DetailsPersonaView}" FlyoutItemIsVisible="False"/>
 </Shell>
 

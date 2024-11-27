@@ -22,6 +22,7 @@
             VerticalOptions="Start">
             <Button Text="Edit" Command="{Binding EditarCommand}"/>
             <Button Text="+" Command="{Binding AddCommand}"/>
+            <Button Text="Detalles" Command="{Binding DetailsCommand}"/>
             <Button Text="O" Clicked="ContentPage_Appearing"/>
         </HorizontalStackLayout>
 

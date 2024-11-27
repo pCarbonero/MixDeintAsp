@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CrudMaui.ViewModels"
+             x:Class="CrudMaui.Views.Persona.DetailsPersonaView">
+    <ContentPage.BindingContext>
+        <vm:clsDetallesPersonaVM/>
+    </ContentPage.BindingContext>
+    
+    <VerticalStackLayout>
+        <Label Text="DETALLES DE PERSONA" FontSize="Title" FontAttributes="Bold"/>
+
+        <Image Source="{Binding Persona.Foto}" WidthRequest="100" HeightRequest="100"/>
+        <Label Text="{Binding Persona.Nombre}" FontSize="Large"/>
+        <Label Text="{Binding Persona.Apellidos}" FontSize="Large"/>
+        <Label Text="{Binding Persona.FechaNacimiento}" FontSize="Medium"/>
+        <Label Text="{Binding Persona.Telefono}" FontSize="Medium"/>
+        <Label Text="{Binding Persona.Direccion}" FontSize="Medium"/>
+        <Label Text="{Binding Persona.NombreDept}" FontSize="Medium"/>
+
+
+    </VerticalStackLayout>
+</ContentPage>
