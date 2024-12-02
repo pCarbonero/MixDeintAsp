@@ -30,9 +30,8 @@ namespace Entidades
             IDDepartamento = p.IDDepartamento;
         }
 
-        public clsPersona(int id, string nombre, string apellidos, string telefono, string direccion, string foto, DateTime fechaNacimiento, int idDepartamento)
+        public clsPersona(string nombre, string apellidos, string telefono, string direccion, string foto, DateTime fechaNacimiento, int idDepartamento)
         {
-            Id = id;
             Nombre = nombre;
             Apellidos = apellidos;
             Telefono = telefono;

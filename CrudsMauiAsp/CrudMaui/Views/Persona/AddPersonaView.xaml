@@ -14,17 +14,17 @@
             HorizontalOptions="Center" />
 
         <Label Text="Nombre"/>
-        <Entry Text="{Binding Persona.Nombre}"/> <!--¿Qué?-->
+        <Entry Text="{Binding NuevoNombre}"/> <!--¿Qué?-->
         <Label Text="Apellidos"/>
-        <Entry Text="{Binding Persona.Apellidos}"/>
+        <Entry Text="{Binding NuevoApellidos}"/>
         <Label Text="Direccion"/>
-        <Entry Text="{Binding Persona.Direccion}"/>
+        <Entry Text="{Binding NuevoDireccion}"/>
         <Label Text="Fecha de nacimiento"/>
-        <Entry Text="{Binding Persona.FechaNacimiento}"/>
+        <DatePicker MinimumDate="01/01/1920" Date="{Binding NuevoFechaNacimiento, Mode=TwoWay}"/>
         <Label Text="Telefono"/>
-        <Entry Text="{Binding Persona.Telefono}"/>
+        <Entry Text="{Binding NuevoTelefono}"/>
         <Label Text="Foto"/>
-        <Entry Text="{Binding Persona.Foto}"/>
+        <Entry Text="{Binding NuevoFoto}"/>
 
         <Picker ItemsSource="{Binding ListaDepartamentos}"
                 ItemDisplayBinding="{Binding Nombre}"

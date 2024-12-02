@@ -12,26 +12,54 @@ using System.Threading.Tasks;
 
 namespace CrudMaui.ViewModels
 {
-    public class clsAddPersonaVM: INotifyPropertyChanged
+    public class clsAddPersonaVM: clsPersona, INotifyPropertyChanged
     {
         #region atributos
         private clsPersona persona;
         private List<clsDepartamento> listaDepartamentos;
         private clsDepartamento departamentoSeleccionado;
         private DelegateCommand addCommand;
+
+
         #endregion
 
         #region propiedades
-        public clsPersona Persona
+        public string NuevoNombre
         {
-            get { return persona; }
-            set 
-            { 
-                persona = value; 
-                NotifyPropertyChanged("Persona");
-                addCommand.RaiseCanExecuteChanged();
-            }
+            get { return Nombre; } 
+            set { Nombre = value; NotifyPropertyChanged("NuevoNombre"); addCommand.RaiseCanExecuteChanged(); }
         }
+
+        public string NuevoApellidos
+        {
+            get { return Apellidos; }
+            set { Apellidos = value; NotifyPropertyChanged("NuevoApellidos"); addCommand.RaiseCanExecuteChanged(); }
+        }
+
+        public string NuevoTelefono
+        {
+            get { return Telefono; }
+            set { Telefono = value; NotifyPropertyChanged("NuevoTelefono"); addCommand.RaiseCanExecuteChanged(); }
+        }
+
+        public string NuevoDireccion
+        {
+            get { return Direccion; }
+            set { Direccion = value; NotifyPropertyChanged("NuevoDireccion"); addCommand.RaiseCanExecuteChanged(); }
+        }
+
+        public string NuevoFoto
+        {
+            get { return Foto; }
+            set { Foto = value; NotifyPropertyChanged("NuevoFoto"); addCommand.RaiseCanExecuteChanged(); }
+        }
+        public DateTime NuevoFechaNacimiento
+        {
+            get { return FechaNacimiento; }
+            set { FechaNacimiento = value; NotifyPropertyChanged("NuevoFechaNacimiento"); addCommand.RaiseCanExecuteChanged(); }
+        }
+
+
 
         public List<clsDepartamento> ListaDepartamentos
         {
@@ -60,7 +88,6 @@ namespace CrudMaui.ViewModels
 
         public clsAddPersonaVM()
         {
-            persona = new clsPersona();
             departamentoSeleccionado = new clsDepartamento();
             listaDepartamentos = clsListadosBL.listadoCompletoDepartamentosBL();
             addCommand = new DelegateCommand(addCommandExecute, addCommandCanExecute);
@@ -72,7 +99,8 @@ namespace CrudMaui.ViewModels
         {
             try
             {
-                persona.IDDepartamento = departamentoSeleccionado.Id;
+                IDDepartamento = departamentoSeleccionado.Id;
+                persona = new clsPersona(NuevoNombre, NuevoApellidos, NuevoTelefono, NuevoDireccion, NuevoFoto, NuevoFechaNacimiento, IDDepartamento);
 
                 bool pudo = clsManejadoraBL.insertPersonaBL(persona);
 
@@ -93,8 +121,13 @@ namespace CrudMaui.ViewModels
 
         private bool addCommandCanExecute()
         {
-            bool canExecute = true;
+            bool canExecute = false;
 
+            if (!String.IsNullOrEmpty(NuevoNombre) && !String.IsNullOrEmpty(NuevoApellidos) && !String.IsNullOrEmpty(NuevoFoto) 
+                && !String.IsNullOrEmpty(NuevoTelefono) && NuevoDireccion != null && departamentoSeleccionado != null) 
+            { 
+                canExecute = true; 
+            }
 
             return canExecute;
         }
