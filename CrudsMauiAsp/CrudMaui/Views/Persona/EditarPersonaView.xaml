@@ -16,7 +16,7 @@
 
         <Entry Text="{Binding Persona.Nombre}" TextColor="Black"/>
         <Entry Text="{Binding Persona.Apellidos}" TextColor="Black"/>
-        <Entry Text="{Binding Persona.FechaNacimiento}" TextColor="Black"/>
+        <DatePicker MinimumDate="01/01/1920" Date="{Binding Persona.FechaNacimiento, Mode=TwoWay}"/>
         <Entry Text="{Binding Persona.Direccion}" TextColor="Black"/>
         <Entry Text="{Binding Persona.Foto}" TextColor="Black"/>
         <Picker ItemsSource="{Binding ListaDepartamentos}"

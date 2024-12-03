@@ -65,7 +65,9 @@ namespace CrudMaui.ViewModels
         public clsEditarPersonaVM() 
         {
             listaDepartamentos = clsListadosBL.listadoCompletoDepartamentosBL();
-            actualizarPersona = new DelegateCommand(actualizarCommandExecute/*, actualizarCommandCanExecute*/);
+            actualizarPersona = new DelegateCommand(actualizarCommandExecute);
+            persona = new clsPersona();
+            departamentoSeleccionado = new clsDepartamento();
         }
         #endregion
 
@@ -82,13 +84,6 @@ namespace CrudMaui.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert("ASJIOFH", "SAHDOSIH", "OJ");
             }
-        }
-
-        public bool actualizarCommandCanExecute()
-        {
-             bool canExecute = false;
-             if (departamentoSeleccionado == null) { canExecute = true; }
-             return canExecute;
         }
         #endregion
 

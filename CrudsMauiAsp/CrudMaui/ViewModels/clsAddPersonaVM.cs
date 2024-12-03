@@ -99,7 +99,7 @@ namespace CrudMaui.ViewModels
         {
             try
             {
-                IDDepartamento = departamentoSeleccionado.Id;
+                    IDDepartamento = departamentoSeleccionado.Id;
                 persona = new clsPersona(NuevoNombre, NuevoApellidos, NuevoTelefono, NuevoDireccion, NuevoFoto, NuevoFechaNacimiento, IDDepartamento);
 
                 bool pudo = clsManejadoraBL.insertPersonaBL(persona);
@@ -124,7 +124,7 @@ namespace CrudMaui.ViewModels
             bool canExecute = false;
 
             if (!String.IsNullOrEmpty(NuevoNombre) && !String.IsNullOrEmpty(NuevoApellidos) && !String.IsNullOrEmpty(NuevoFoto) 
-                && !String.IsNullOrEmpty(NuevoTelefono) && NuevoDireccion != null && departamentoSeleccionado != null) 
+                && !String.IsNullOrEmpty(NuevoTelefono) && NuevoDireccion != null && departamentoSeleccionado.Id != 0) 
             { 
                 canExecute = true; 
             }
