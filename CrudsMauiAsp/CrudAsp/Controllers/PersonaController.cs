@@ -1,8 +1,12 @@
 ﻿using BL;
+using CrudAsp.Models;
+using CrudAsp.Models.ViewModels;
 using Entidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace CrudAsp.Controllers
 {
@@ -11,10 +15,10 @@ namespace CrudAsp.Controllers
         // GET: PersonaController
         public ActionResult Index()
         {
-            List<clsPersona> listado = new List<clsPersona>();
+            clsListadoPersonasConNombreDept listado;
             try
             {
-                listado = clsListadosBL.listadoCompletoPersonasBL();
+                listado = new clsListadoPersonasConNombreDept();
             }
             catch (Exception ex) 
             {
@@ -27,16 +31,18 @@ namespace CrudAsp.Controllers
         public ActionResult Details(int id)
         {
             clsPersona persona = new clsPersona();
+            clsPersonaNombreDepartamento personaDept;
             try
             {
                 persona = clsListadosBL.getPersonaIdBL(id);
+                personaDept = new clsPersonaNombreDepartamento(persona, clsListadosBL.listadoCompletoDepartamentosBL());
             }
             catch (Exception e)
             {
                 return View("Error");
             }
 
-            return View(persona);
+            return View(personaDept);
         }
 
         // GET: PersonaController/Create

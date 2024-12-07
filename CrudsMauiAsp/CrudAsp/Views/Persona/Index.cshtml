@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Entidades.clsPersona>
+﻿@model CrudAsp.Models.ViewModels.clsListadoPersonasConNombreDept
 
 @{
     ViewData["Title"] = "Index";
@@ -10,37 +10,38 @@
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellidos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaNacimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDDepartamento)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].Id)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].Nombre)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].Apellidos)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].Telefono)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].Direccion)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].Foto)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].FechaNacimiento)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => Model.ListaPersonasDept[0].NombreDept)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+   
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.ListaPersonasDept) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -64,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.FechaNacimiento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IDDepartamento)
+                    @Html.DisplayFor(modelItem => item.NombreDept)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
