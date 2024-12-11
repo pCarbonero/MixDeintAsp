@@ -1,0 +1,25 @@
+BL:
+    clsListadosBL:
+        + static List<clsCelda> listadoDeCeldas(int dificultad) -> si dificultad = 1: 4x4, si dificultad = 2: 5x4 ...
+    
+
+
+MODELOS:
+    clsCelda:
+        bool esBomba {get; set;}
+        bool revelado {get; set;}
+        string imagen {get;}     
+    
+
+    clsTablero:
+        List<clsCelda> listaCeldas {get;}
+
+
+UI:
+    PartidaVM:
+        + clsTablero {get;}
+        + clsCelda celdaSeleccionada{get; set;}
+        + int aciertos {get; set;}
+        + int fallos {get; set;}
+        + int dificultad
+    
