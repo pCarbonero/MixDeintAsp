@@ -62,28 +62,68 @@ namespace CrudAsp.Controllers.API
             return salida;
         }
 
-        // POST api/<PersonaApiController>
+        // POST api/<PersonasController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] clsPersona persona)
         {
+            bool guardadoCorrectamente;
+            IActionResult salida;
+            if (persona != null)
+            {
+                try
+                {
+                    guardadoCorrectamente = clsManejadoraBL.insertPersonaBL(persona);
+                    salida = Ok(guardadoCorrectamente);
+                }
+                catch
+                {
+                    salida = BadRequest();
+                }
+            }
+            else
+            {
+                salida = NoContent();
+            }
+
+            return salida;
         }
 
-        // PUT api/<PersonaApiController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/<PersonasController>/
+        [HttpPut]
+        public IActionResult Put(clsPersona persona)
         {
+            bool guardadoCorrectamente;
+            IActionResult salida;
+            if (persona != null)
+            {
+                try
+                {
+                    guardadoCorrectamente = clsManejadoraBL.updatePersonaBL(persona);
+                    salida = Ok(guardadoCorrectamente);
+                }
+                catch
+                {
+                    salida = BadRequest();
+                }
+            }
+            else
+            {
+                salida = NoContent();
+            }
+
+            return salida;
         }
 
+        // DELETE api/<PersonasController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             IActionResult salida;
-            int numFilasAfectadas = 0;
-
+            int columnasBorradas;
             try
             {
-                numFilasAfectadas = clsManejadoraBL.deletePersonaBL(id);
-                if (numFilasAfectadas == 0)
+                columnasBorradas = clsManejadoraBL.deletePersonaBL(id);
+                if (columnasBorradas == 0)
                 {
                     salida = NotFound();
                 }
@@ -98,9 +138,8 @@ namespace CrudAsp.Controllers.API
             }
 
             return salida;
+
         }
-
-
 
     }
 }
