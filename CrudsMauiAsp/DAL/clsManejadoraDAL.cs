@@ -73,13 +73,17 @@ namespace DAL
 
                 comando.CommandText = "INSERT INTO Personas VALUES (@nombre, @apellidos, @telefono, @direccion, @foto, @fechaNac, @idDep)";
 
-                comando.ExecuteNonQuery();
+                comando.ExecuteNonQuery(); // aqui no se produce ninguna excepcion, pero salta directamente al finally
 
                 insertada = true;
             }
             catch (SqlException ex) 
             { 
-                throw; 
+                throw ex; 
+            }
+            catch (Exception ex2)
+            {
+                throw ex2;
             }
             finally
             {
